@@ -1,0 +1,210 @@
+\documentclass[jou,floatsintext]{apa6}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{tabto}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+
+\title{CheatSheet Git}
+\author{Ugo Vollhardt}%\date{November 2017}
+\affiliation{CEA LIST - CentraleSupélec}
+
+\begin{document}
+\maketitle
+
+\lstset { %
+	language=bash,
+	backgroundcolor=\color{black!5}, % set backgroundcolor
+	basicstyle=\footnotesize,% basic font setting
+}
+\section{Create}
+
+Cloner un repo existant distant en local
+\begin{lstlisting}
+$ git clone ssh://user@domain.com/repo.git
+\end{lstlisting}
+Créer un repo local simple
+\begin{lstlisting}
+$ git init
+\end{lstlisting}
+
+\section{Local Change}
+
+Afficher les fichiers modifiés dans le repo local
+\begin{lstlisting}
+$ git status
+\end{lstlisting}
+Afficher les modifications faites sur les fichiers trackés
+\begin{lstlisting}
+$ git diff
+\end{lstlisting}
+Afficher les modifications faites seulement sur un seul fichier
+\begin{lstlisting}
+$ git diff <fichier>
+\end{lstlisting}
+Ajouter des fichiers à la staging area
+\begin{lstlisting}
+$ git add -v <fichier1> <fichier2> etc.
+\end{lstlisting}
+Ajouter tous les fichiers modifiés à la staging area (trackés + non trackés)
+\begin{lstlisting}
+$ git add -Av 
+\end{lstlisting}
+Ajouter seulement une partie des modifications d'un fichier dans la staging area
+\begin{lstlisting}
+$ git add -p <fichier>
+\end{lstlisting}
+\begin{itemize}
+	\item y : Oui, ajouter le morceau présenté à la staging area.
+	\item n : Non, ne pas ajouter.
+	\item d : Non, ne pas ajouter ni celui-ci, ni les suivants du fichier en cours.
+	\item s : Découper le groupe de modification en modifications unitaires.
+	\item e : Éditer à la main le morceau sélectionné.
+	\item q : Arrêter les ajouts
+\end{itemize}
+Ajouter tous les changements sur les fichiers trackés et commiter immédiatement
+\begin{lstlisting}
+$ git commit -A
+\end{lstlisting}
+Commiter le contenu de la staging area
+\begin{lstlisting}
+$ git commit 
+\end{lstlisting}
+Ajouter au commit précédent le contenu actuel de la staging area et modification du message (- -no-edit pour ne pas le modifier)
+\begin{lstlisting}
+$ git commit --amend
+\end{lstlisting}
+
+\section{Commit history}
+
+Afficher l'historique des commits
+\begin{lstlisting}
+$ git log
+\end{lstlisting}
+Afficher l'historique des modifications pour un seul fichier (Ajouter - - avant <file> pour inclure les fichiers supprimés, ou dont le nom a été modifié)
+\begin{lstlisting}
+$ git log -p <file>
+\end{lstlisting}
+Afficher les auteurs des modifications d'un fichier
+\begin{lstlisting}
+$ git blame <file>
+\end{lstlisting}
+
+\section{Branch \& Tag}
+
+Afficher l'ensemble des branches existantes (-v pour avoir le détail du dernier commit de chaque branche)
+\begin{lstlisting}
+$ git branch --all 
+\end{lstlisting}
+Faire pointer HEAD sur le pointeur d'une branche
+\begin{lstlisting}
+$ git checkout <branch>
+\end{lstlisting}
+Créer une nouvelle branche
+\begin{lstlisting}
+$ git branch <newbranch>
+\end{lstlisting}
+Supprimer une branche locale
+\begin{lstlisting}
+$ git branch -d <branch>
+\end{lstlisting}
+Apposer un tag sur le commit pointé par HEAD
+\begin{lstlisting}
+$ git tag <tag-name>
+\end{lstlisting}
+Faire pointer une branche sur un commit
+\begin{lstlisting}
+$ git branch -f <branch> <commit>
+\end{lstlisting}
+
+\section{Update \& Publish}
+
+Lister les remote existants
+\begin{lstlisting}
+$ git remote -v
+\end{lstlisting} 
+Lister les informations d'un remote spécifique
+\begin{lstlisting}
+$ git remote show <remote>
+\end{lstlisting}
+Ajouter un nouveau remote
+\begin{lstlisting}
+$ git remote add <short-name> <url>
+\end{lstlisting}
+Télécharger toutes les modifications présentes sur un remote sans les intéger au repo local
+\begin{lstlisting}
+$ git fetch --all <remote>
+\end{lstlisting}
+Télécharger les modifications présentes sur une branch du remote et les intégrer au repo local
+\begin{lstlisting}
+$ git pull <remote> <branch>
+\end{lstlisting}
+Publier sur le remote le contenue d'une branche (--tags pour push les tags en même temps)
+\begin{lstlisting}
+$ git push <remote> <branch> 
+\end{lstlisting}
+Supprimer une branche présente sur un remote
+\begin{lstlisting}
+$ git branch -dr <remote/branch>
+\end{lstlisting}
+
+\section{Merge \& Rebase}
+
+Merge une branche dans le HEAD
+\begin{lstlisting}
+$ git merge <branch>
+\end{lstlisting}
+Rebase le HEAD sur une branche (ne jamais rebase des commits déjà publiés !)
+\begin{lstlisting}
+$ git rebase <branch> 
+\end{lstlisting}
+Annuler un rebase 
+\begin{lstlisting}
+$ git rebase --abort 
+\end{lstlisting}
+Continuer un rebase après avoir résolu les conflits 
+\begin{lstlisting}
+$ git rebase --continue 
+\end{lstlisting}
+Ignorer un commit dans durant le rebase
+\begin{lstlisting}
+$ git rebase --skip
+\end{lstlisting}
+Choisir les commits qui doivent être rebase sur une branche (Rebase interactif) 
+\begin{lstlisting}
+$ git rebase -i <branch> 
+\end{lstlisting}
+\begin{itemize}
+	\item p, pick = utiliser le commit
+	\item r, reword = utiliser le commit, mais éditer le message du commit
+	\item e, edit = utiliser le commit, mais supend la procédure pour faire des corrections (git commit --amend)
+	\item s, squash = utiliser le commit, mais le fusionne avec le commit précédent
+\end{itemize}
+Ouvrir l'outils de merge configuré dans git (fonctionne uniquement si il est configuré)
+\begin{lstlisting}
+$ git mergetool 
+\end{lstlisting}
+\section{Undo}	
+Supprime le contenu de la staging area 
+\begin{lstlisting}
+$ git reset HEAD 
+\end{lstlisting}
+Ramène l'état du répertoire de travail à l'état du dernière commit 
+\begin{lstlisting}
+$ git reset --hard HEAD 
+\end{lstlisting}
+Ramène l'état d'un fichier du répertoire de travail à son état du dernière commit 
+\begin{lstlisting}
+$ git checkout HEAD <fichier>
+\end{lstlisting}
+Ramène l'état d'un fichier du répertoire de travail à son état dans un commit précédent 
+\begin{lstlisting}
+$ git checkout <commit> <fichier>
+\end{lstlisting}
+Ajoute à la staging area l'inverse du contenu d'un commit 
+\begin{lstlisting}
+$ git revert <commit>
+\end{lstlisting}
+\end{document}
