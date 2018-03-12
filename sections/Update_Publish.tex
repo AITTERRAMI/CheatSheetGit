@@ -1,0 +1,30 @@
+\section*{Update \& Publish}
+
+Lister les remote existants
+\begin{lstlisting}
+$ git remote -v
+\end{lstlisting} 
+Lister les informations d'un remote spécifique
+\begin{lstlisting}
+$ git remote show <remote>
+\end{lstlisting}
+Ajouter un nouveau remote
+\begin{lstlisting}
+$ git remote add <short-name> <url>
+\end{lstlisting}
+Télécharger toutes les modifications présentes sur un remote sans les intéger au repo local
+\begin{lstlisting}
+$ git fetch --all <remote>
+\end{lstlisting}
+Télécharger les modifications présentes sur une branch du remote et les intégrer au repo local
+\begin{lstlisting}
+$ git pull <remote> <branch>
+\end{lstlisting}
+Publier sur le remote le contenue d'une branche (--tags pour push les tags en même temps)
+\begin{lstlisting}
+$ git push <remote> <branch> 
+\end{lstlisting}
+Supprimer une branche présente sur un remote
+\begin{lstlisting}
+$ git branch -dr <remote/branch>
+\end{lstlisting}

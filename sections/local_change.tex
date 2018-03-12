@@ -1,0 +1,54 @@
+\section*{Local Change}
+
+Afficher les fichiers modifiés dans le repo local
+\begin{lstlisting}
+$ git status
+\end{lstlisting}
+Afficher les modifications faites sur les fichiers trackés
+\begin{lstlisting}
+$ git diff
+\end{lstlisting}
+Afficher les modifications faites seulement sur un seul fichier
+\begin{lstlisting}
+$ git diff <fichier>
+\end{lstlisting}
+Ajouter des fichiers à la staging area
+\begin{lstlisting}
+$ git add -v <fichier1> <fichier2> etc.
+\end{lstlisting}
+Ajouter tous les fichiers modifiés à la staging area (trackés + non trackés)
+\begin{lstlisting}
+$ git add -Av 
+\end{lstlisting}
+Ajouter seulement une partie des modifications d'un fichier dans la staging area
+\begin{lstlisting}
+$ git add -p <fichier>
+\end{lstlisting}
+\begin{itemize}
+	\item y : Oui, ajouter le morceau présenté à la staging area.
+	\item n : Non, ne pas ajouter.
+	\item d : Non, ne pas ajouter ni celui-ci, ni les suivants du fichier en cours.
+	\item s : Découper le groupe de modification en modifications unitaires.
+	\item e : Éditer à la main le morceau sélectionné.
+	\item q : Arrêter les ajouts
+\end{itemize}
+Ajouter tous les changements sur les fichiers trackés et commiter immédiatement
+\begin{lstlisting}
+$ git commit -A
+\end{lstlisting}
+Commiter le contenu de la staging area
+\begin{lstlisting}
+$ git commit 
+\end{lstlisting}
+Ajouter au commit précédent le contenu actuel de la staging area et modification du message (- -no-edit pour ne pas le modifier)
+\begin{lstlisting}
+$ git commit --amend
+\end{lstlisting}
+Mettre de coté les modifications faites sur le repertoire de travail et le ramener à l'état du commit pointé par HEAD
+\begin{lstlisting}
+$ git stash
+\end{lstlisting}
+Restaure dans le repertoire de travail le dernier lot de modifications mis de coté par la commande stash
+\begin{lstlisting}
+$ git stash pop
+\end{lstlisting}

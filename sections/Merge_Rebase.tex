@@ -1,0 +1,36 @@
+\section*{Merge \& Rebase}
+
+Merge une branche dans le HEAD
+\begin{lstlisting}
+$ git merge <branch>
+\end{lstlisting}
+Rebase le HEAD sur une branche (ne jamais rebase des commits déjà publiés !)
+\begin{lstlisting}
+$ git rebase <branch> 
+\end{lstlisting}
+Annuler un rebase 
+\begin{lstlisting}
+$ git rebase --abort 
+\end{lstlisting}
+Continuer un rebase après avoir résolu les conflits 
+\begin{lstlisting}
+$ git rebase --continue 
+\end{lstlisting}
+Ignorer un commit dans durant le rebase
+\begin{lstlisting}
+$ git rebase --skip
+\end{lstlisting}
+Choisir les commits qui doivent être rebase sur une branche (Rebase interactif) 
+\begin{lstlisting}
+$ git rebase -i <branch> 
+\end{lstlisting}
+\begin{itemize}
+	\item p, pick = utiliser le commit
+	\item r, reword = utiliser le commit, mais éditer le message du commit
+	\item e, edit = utiliser le commit, mais supend la procédure pour faire des corrections (git commit --amend)
+	\item s, squash = utiliser le commit, mais le fusionne avec le commit précédent
+\end{itemize}
+Ouvrir l'outils de merge configuré dans git (fonctionne uniquement si il est configuré)
+\begin{lstlisting}
+$ git mergetool 
+\end{lstlisting}

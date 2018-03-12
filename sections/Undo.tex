@@ -1,0 +1,21 @@
+\section*{Undo}	
+Supprime le contenu de la staging area 
+\begin{lstlisting}
+$ git reset HEAD 
+\end{lstlisting}
+Ramène l'état du répertoire de travail à l'état du dernière commit 
+\begin{lstlisting}
+$ git reset --hard HEAD 
+\end{lstlisting}
+Ramène l'état d'un fichier du répertoire de travail à son état du dernière commit 
+\begin{lstlisting}
+$ git checkout HEAD <fichier>
+\end{lstlisting}
+Ramène l'état d'un fichier du répertoire de travail à son état dans un commit précédent 
+\begin{lstlisting}
+$ git checkout <commit> <fichier>
+\end{lstlisting}
+Ajoute à la staging area l'inverse du contenu d'un commit 
+\begin{lstlisting}
+$ git revert <commit>
+\end{lstlisting}

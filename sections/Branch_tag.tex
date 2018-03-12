@@ -1,0 +1,26 @@
+\section*{Branch \& Tag}
+
+Afficher l'ensemble des branches existantes (-v pour avoir le détail du dernier commit de chaque branche)
+\begin{lstlisting}
+$ git branch --all 
+\end{lstlisting}
+Faire pointer HEAD sur le pointeur d'une branche
+\begin{lstlisting}
+$ git checkout <branch>
+\end{lstlisting}
+Créer une nouvelle branche
+\begin{lstlisting}
+$ git branch <newbranch>
+\end{lstlisting}
+Supprimer une branche locale
+\begin{lstlisting}
+$ git branch -d <branch>
+\end{lstlisting}
+Apposer un tag sur le commit pointé par HEAD
+\begin{lstlisting}
+$ git tag <tag-name>
+\end{lstlisting}
+Faire pointer une branche sur un commit
+\begin{lstlisting}
+$ git branch -f <branch> <commit>
+\end{lstlisting}
