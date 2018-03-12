@@ -76,7 +76,14 @@ Ajouter au commit précédent le contenu actuel de la staging area et modificati
 \begin{lstlisting}
 $ git commit --amend
 \end{lstlisting}
-
+Mettre de coté les modifications faites sur le repertoire de travail et le ramener à l'état du commit pointé par HEAD
+\begin{lstlisting}
+$ git stash
+\end{lstlisting}
+Restaure dans le repertoire de travail le dernier lot de modifications mis de coté par la commande stash
+\begin{lstlisting}
+$ git stash pop
+\end{lstlisting} 
 \section{Commit history}
 
 Afficher l'historique des commits
